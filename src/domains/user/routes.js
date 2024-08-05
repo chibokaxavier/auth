@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const createNewUser = require("./controller");
+const { createNewUser } = require("./controller");
 
 router.post("/signup", async (req, res) => {
   try {
@@ -24,3 +24,5 @@ router.post("/signup", async (req, res) => {
     res.status(400).send(error.message);
   }
 });
+
+module.exports = router;
