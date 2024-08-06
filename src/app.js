@@ -9,6 +9,6 @@ const app = express();
 
 app.use(cors());
 app.use(bodyParser());
-app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/user", authRouter);
 
 module.exports = app;
