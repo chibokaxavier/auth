@@ -18,8 +18,6 @@ const authenticateUser = async (data) => {
 
     const tokenData = { userId: fetchedUser._id, email };
     const token = await createToken(tokenData);
-    console.log(token);
-
     fetchedUser.token = token;
     return fetchedUser;
   } catch (error) {
