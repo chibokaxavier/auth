@@ -5,21 +5,21 @@ const { AUTH_EMAIL, AUTH_PASS,CLIENT_SECRET,CLIENT_ID } = process.env;
 
 
 
-const oauth2Client = new OAuth2(
-    CLIENT_ID, // Replace with your client ID
-    CLIENT_SECRET, // Replace with your client secret
-    "https://developers.google.com/oauthplayground" // Redirect URL
-  );
+// const oauth2Client = new OAuth2(
+//     CLIENT_ID, // Replace with your client ID
+//     CLIENT_SECRET, // Replace with your client secret
+//     "https://developers.google.com/oauthplayground" // Redirect URL
+//   );
 
-let transporter = nodemailer.createTransport({
-  host: "smtp-mail.outlook.com",
-  port: 587, // typical port for Outlook
-  secure: false, 
+// Create a transporter object using Gmail SMTP
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
   auth: {
-    user: AUTH_EMAIL,
-    pass: AUTH_PASS,
-  },
-});
+    user: process.env.AUTH_EMAIL,
+    pass: process.env.AUTH_PASS
+  }
+}); 
+
 
 transporter.verify((error, success) => {
   if (error) {

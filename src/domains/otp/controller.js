@@ -2,7 +2,7 @@ const OTP = require("./model");
 const generateOTP = require("../../utils/generateOTP");
 const sendEmail = require("../../utils/sendEmail");
 const { AUTH_EMAIL, AUTH_PASS } = process.env;
-const hashData = require("../../utils/hashData");
+const { hashData } = require("../../utils/hashData");
 
 const sendOTP = async ({ email, message, subject, duration = 1 }) => {
   try {
@@ -23,7 +23,7 @@ const sendOTP = async ({ email, message, subject, duration = 1 }) => {
 
     await sendEmail(mailOptions);
 
-    const hashedOTP = hashData(generatedOTP);
+    const hashedOTP = await hashData(generatedOTP);
 
     const newOTP = await new OTP({
       email,

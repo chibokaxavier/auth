@@ -10,3 +10,4 @@ const OTPSchema = new Schema({
 
 const OTP = mongoose.model("OTP", OTPSchema);
 module.exports = OTP;
+ 
