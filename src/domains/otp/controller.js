@@ -18,8 +18,12 @@ const sendOTP = async ({ email, message, subject, duration = 1 }) => {
       from: AUTH_EMAIL,
       to: email,
       subject,
-      html: `<p>${message}</p><p style='color:tomato; font-size:25px; letter-spacing:2px;"><b>${generatedOTP}</b></p><p>This code <b>expires in ${duration} hour(s)</b>.</p>`,
-    };
+      html: `
+        <p>${message}</p>
+        <p style="color:#FF6347; font-size:25px;"><b>${generatedOTP}</b></p>
+        <p>This code <b>expires in ${duration} hour(s)</b>.</p>
+      `,
+   };
 
     await sendEmail(mailOptions);
 
