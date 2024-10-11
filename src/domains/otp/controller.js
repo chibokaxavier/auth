@@ -66,5 +66,12 @@ const verifyOTP = async ({ email, otp }) => {
     throw error;
   }
 };
+const deleteOTP = async (email) => {
+  try {
+    await OTP.deleteOne({ email });
+  } catch (error) {
+    throw error;
+  }
+};
 
-module.exports = { sendOTP, verifyOTP };
+module.exports = { sendOTP, verifyOTP, deleteOTP };
