@@ -1,12 +1,15 @@
 const express = require("express");
-const { sendOTP } = require("./controller");
+const { sendOTP, verifyOTP } = require("./controller");
 const router = express.Router();
 
 router.post("/verify", async (req, res) => {
   try {
     let { email, otp } = req.body;
-    
-  } catch (error) {}
+    const validOTP = await verifyOTP({ email, otp });
+    res.status(200).json({ valid: validOTP });
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
 });
 
 router.post("/", async (req, res) => {
