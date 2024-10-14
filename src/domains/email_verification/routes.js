@@ -9,5 +9,10 @@ router.post("/", async (req, res) => {
       throw Error("An email is required");
     }
     const createdEmailVerificationOTP = await sendVerificationOTPEmail(email);
-  } catch (error) {}
+    res.status(200).json(createdEmailVerificationOTP);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
 });
+
+module.exports = router;
