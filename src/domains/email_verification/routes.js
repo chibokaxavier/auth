@@ -2,6 +2,13 @@ const express = require("express");
 const { sendVerificationOTPEmail } = require("./controller");
 const router = express.Router();
 
+router.post("/verify", async (req, res) => {
+  try {
+    const { email, otp } = req.body;
+    if (!(email && otp)) throw Error("Empty otp details are not allowed");
+  } catch (error) {}
+});
+
 router.post("/", async (req, res) => {
   try {
     const { email } = req.body;
