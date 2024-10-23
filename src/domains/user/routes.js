@@ -2,12 +2,16 @@ const express = require("express");
 const router = express.Router();
 const { createNewUser, authenticateUser } = require("./controller");
 const auth = require("../../middleware/auth");
+const {
+  sendVerificationOTPEmail,
+} = require("../email_verification/controller");
 
 router.get("/private_route", auth, (req, res) => {
   res
     .status(200)
     .send(`You are in the priavte territory of ${req.currentUser.email}`);
 });
+
 router.post("/login", async (req, res) => {
   try {
     let { email, password } = req.body;
@@ -36,6 +40,7 @@ router.post("/signup", async (req, res) => {
       throw Error("Password should be at least 8 characters long");
     } else {
       const newUser = await createNewUser({ name, email, password });
+      await sendVerificationOTPEmail(email);
       res.status(200).json(newUser);
     }
   } catch (error) {

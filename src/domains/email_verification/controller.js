@@ -7,9 +7,10 @@ const verifyUserEmail = async ({ email, otp }) => {
     if (!valdiOTP) {
       throw Error("Invalid code passed. Check your inbox");
     }
-    await deleteOTP(email)
+    await User.updateOne({ email }, { verified: true });
+    await deleteOTP(email);
   } catch (error) {
-    throw error
+    throw error;
   }
 };
 
@@ -32,4 +33,4 @@ const sendVerificationOTPEmail = async (email) => {
   }
 };
 
-module.exports = { sendVerificationOTPEmail,verifyUserEmail };
+module.exports = { sendVerificationOTPEmail, verifyUserEmail };

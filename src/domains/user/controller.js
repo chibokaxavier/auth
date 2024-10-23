@@ -9,7 +9,9 @@ const authenticateUser = async (data) => {
     if (!fetchedUser) {
       throw Error("Invalid credentials entered");
     }
-
+    if (!fetchedUser.verified) {
+      throw Error("Email hasn't been verified yet. Check your inbox");
+    }
     const hashedPassword = fetchedUser.password;
     const passwordMatch = verifyHashedData(hashedPassword, password);
     if (!passwordMatch) {
